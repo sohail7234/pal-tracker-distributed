@@ -182,8 +182,6 @@ jobs:
           cf auth
           cf target -o "$CF_ORG" -s "$CF_SPACE"
           ./gradlew cfMigrate
-      - name: Build with Gradle
-        run: ./gradlew build
         env:
           CF_API_URL: ${{ secrets.CF_API_URL }}
           CF_ORG: ${{ secrets.CF_ORG }}
