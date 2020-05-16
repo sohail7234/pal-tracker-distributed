@@ -62,6 +62,7 @@ public class FlowTest {
         backlogServer.startWithDatabaseName("tracker_backlog_test");
         timesheetsServer.startWithDatabaseName("tracker_timesheets_test");
         ApplicationServer.waitOnPorts("8881", "8882", "8883", "8884");
+       // TestScenarioSupport.clearAllDatabases();
         TestScenarioSupport.clearAllDatabases();
     }
 
@@ -81,8 +82,8 @@ public class FlowTest {
         assertThat(response.body).isEqualTo("Noop!");
 
         response = httpClient.post(registrationServerUrl("/registration"), jsonMapBuilder()
-                .put("name", "aUser")
-                .build()
+            .put("name", "aUser")
+            .build()
         );
         long createdUserId = findResponseId(response);
         assertThat(createdUserId).isGreaterThan(0);
@@ -95,9 +96,9 @@ public class FlowTest {
         assertThat(createdAccountId).isGreaterThan(0);
 
         response = httpClient.post(registrationServerUrl("/projects"), jsonMapBuilder()
-                .put("accountId", createdAccountId)
-                .put("name", "aProject")
-                .build()
+            .put("accountId", createdAccountId)
+            .put("name", "aProject")
+            .build()
         );
         long createdProjectId = findResponseId(response);
         assertThat(createdProjectId).isGreaterThan(0);
@@ -110,12 +111,12 @@ public class FlowTest {
         assertThat(response.body).isEqualTo("Noop!");
 
         response = httpClient.post(
-                allocationsServerUrl("/allocations"), jsonMapBuilder()
-                        .put("projectId", createdProjectId)
-                        .put("userId", createdUserId)
-                        .put("firstDay", "2015-05-17")
-                        .put("lastDay", "2015-05-26")
-                        .build()
+            allocationsServerUrl("/allocations"), jsonMapBuilder()
+                .put("projectId", createdProjectId)
+                .put("userId", createdUserId)
+                .put("firstDay", "2015-05-17")
+                .put("lastDay", "2015-05-26")
+                .build()
         );
 
         long createdAllocationId = findResponseId(response);
@@ -129,9 +130,9 @@ public class FlowTest {
         assertThat(response.body).isEqualTo("Noop!");
 
         response = httpClient.post(backlogServerUrl("/stories"), jsonMapBuilder()
-                .put("projectId", createdProjectId)
-                .put("name", "A story")
-                .build()
+            .put("projectId", createdProjectId)
+            .put("name", "A story")
+            .build()
         );
         long createdStoryId = findResponseId(response);
         assertThat(createdStoryId).isGreaterThan(0);
@@ -144,11 +145,11 @@ public class FlowTest {
         assertThat(response.body).isEqualTo("Noop!");
 
         response = httpClient.post(timesheetsServerUrl("/time-entries"), jsonMapBuilder()
-                .put("projectId", createdProjectId)
-                .put("userId", createdUserId)
-                .put("date", "2015-12-17")
-                .put("hours", 8)
-                .build()
+            .put("projectId", createdProjectId)
+            .put("userId", createdUserId)
+            .put("date", "2015-12-17")
+            .put("hours", 8)
+            .build()
         );
         long createdTimeEntryId = findResponseId(response);
         assertThat(createdTimeEntryId).isGreaterThan(0);
