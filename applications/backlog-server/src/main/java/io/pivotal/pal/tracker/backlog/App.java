@@ -16,8 +16,8 @@ import java.util.TimeZone;
 
 @EnableWebSecurity
 @EnableResourceServer
-@EnableOAuth2Client
 @EnableEurekaClient
+@EnableOAuth2Client
 @SpringBootApplication
 @ComponentScan({"io.pivotal.pal.tracker.backlog", "io.pivotal.pal.tracker.restsupport"})
 public class App {
@@ -29,9 +29,10 @@ public class App {
 
     @Bean
     ProjectClient projectClient(
-        RestOperations restOperations,
-        @Value("${registration.server.endpoint}") String registrationEndpoint
+            RestOperations restOperations,
+            @Value("${registration.server.endpoint}") String registrationEndpoint
     ) {
         return new ProjectClient(restOperations, registrationEndpoint);
     }
 }
+
