@@ -70,7 +70,7 @@ public class ApplicationServer {
 
                 long timeSpent = ChronoUnit.SECONDS.between(start, Instant.now());
                 if (timeSpent > timeout) {
-                    fail("Timed out waiting for server on port " + port);
+                    fail("Timed out waiting for server on port " + port  + "and time is : " + timeSpent);
                 }
 
                 System.out.print(".");
